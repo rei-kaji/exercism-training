@@ -1,82 +1,44 @@
+/**
+ * Function to decode the value of a color code.
+ * @param color An array of 2 string elements representing the color codes
+ * @returns The decimal equivalent of the color code
+ */
 export function decodedValue(color: string[]): number {
-  let firstColor;
-  let secondColor;
-
-  console.log(color);
-
-  switch (color[0].toUpperCase()) {
-    case "BLACK":
-      firstColor = "0";
-      break;
-    case "BROWN":
-      firstColor = "1";
-      break;
-    case "RED":
-      firstColor = "2";
-      break;
-    case "ORANGE":
-      firstColor = "3";
-      break;
-    case "YELLOW":
-      firstColor = "4";
-      break;
-    case "GREEN":
-      firstColor = "5";
-      break;
-    case "BLUE":
-      firstColor = "6";
-      break;
-    case "VIOLET":
-      firstColor = "7";
-      break;
-    case "GREY":
-      firstColor = "8";
-      break;
-    case "WHITE":
-      firstColor = "9";
-      break;
-    default:
-      firstColor = "";
-      break;
+  // Check if the input array is valid
+  if (!color || color.length < 2) {
+    throw new Error("Invalid input: expected an array of 2 elements");
   }
 
-  switch (color[1].toUpperCase()) {
-    case "BLACK":
-      secondColor = "0";
-      break;
-    case "BROWN":
-      secondColor = "1";
-      break;
-    case "RED":
-      secondColor = "2";
-      break;
-    case "ORANGE":
-      secondColor = "3";
-      break;
-    case "YELLOW":
-      secondColor = "4";
-      break;
-    case "GREEN":
-      secondColor = "5";
-      break;
-    case "BLUE":
-      secondColor = "6";
-      break;
-    case "VIOLET":
-      secondColor = "7";
-      break;
-    case "GREY":
-      secondColor = "8";
-      break;
-    case "WHITE":
-      secondColor = "9";
-      break;
-    default:
-      secondColor = "";
-      break;
+  // Define a lookup table for the color codes
+  const colorCodes: any = {
+    black: "0",
+    brown: "1",
+    red: "2",
+    orange: "3",
+    yellow: "4",
+    green: "5",
+    blue: "6",
+    violet: "7",
+    grey: "8",
+    white: "9",
+  };
+
+  // Get the first and second color codes
+  const firstColor = colorCodes[color[0].toLowerCase()];
+  const secondColor = colorCodes[color[1].toLowerCase()];
+
+  // Check if the color codes are valid
+  if (!firstColor || !secondColor) {
+    throw new Error("Invalid color code");
   }
 
-  let colorCode = parseInt(firstColor + secondColor);
+  // Concatenate the color codes and parse the result to an integer
+  const colorCode = parseInt(firstColor + secondColor);
+
+  // Check if the parsed value is a valid number
+  if (isNaN(colorCode)) {
+    throw new Error("Invalid color code");
+  }
 
   return colorCode;
 }
